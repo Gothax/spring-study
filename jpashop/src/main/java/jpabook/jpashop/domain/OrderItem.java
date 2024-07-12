@@ -2,11 +2,14 @@ package jpabook.jpashop.domain;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
     @Id @GeneratedValue
@@ -25,4 +28,24 @@ public class OrderItem {
 
     private int count;
 
+    // Noargs constructor 애너테이션으로 new 키워드 제한 (객체 생성 제한)
+    //생성 메서드
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setCount(count);
+        orderItem.setOrderPrice(orderPrice);
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    // 비즈니스 로직
+    public void cancel() {
+        getItem().addStock(count);
+    }
+    // 조회 로직
+    public int getTotalPrice() {
+        return getOrderPrice()*getCount();
+    }
 }
