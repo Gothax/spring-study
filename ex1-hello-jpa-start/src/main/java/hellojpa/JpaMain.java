@@ -10,9 +10,17 @@ public class JpaMain {
         EntityManager em = emf.createEntityManager();
         //code
 
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
 
+        try {
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+        } finally {
+          em.close();
+        }
 
-        em.close();
         emf.close();
     }
 }
