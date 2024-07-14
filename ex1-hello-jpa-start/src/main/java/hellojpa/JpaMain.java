@@ -10,6 +10,8 @@ public class JpaMain {
         EntityManager em = emf.createEntityManager();
         //code
 
+
+
         em.close();
         emf.close();
     }
