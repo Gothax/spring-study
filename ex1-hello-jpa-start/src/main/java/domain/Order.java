@@ -3,6 +3,7 @@ package domain;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
@@ -12,13 +13,20 @@ public class Order {
     @Column(name = "ORDER_ID")
     private int id;
 
-    @Column(name = "MEMBER_ID")
-    private Long memberId;
+//    @Column(name = "MEMBER_ID")
+//    private Long memberId;
 
     private Date orderDate;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems;
 
     public int getId() {
         return id;
