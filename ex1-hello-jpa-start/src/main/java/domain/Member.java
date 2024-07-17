@@ -2,6 +2,7 @@ package domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,11 @@ public class Member {
 
     private String name;
 
-    private String city;
+    @Embedded
+    private Period period;
 
-    private String street;
-
-    private String zipcode;
+    @Embedded
+    private Address address;
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
@@ -40,28 +41,27 @@ public class Member {
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
+    public Period getPeriod() {
+        return period;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPeriod(Period period) {
+        this.period = period;
     }
 
-    public String getStreet() {
-        return street;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public String getZipcode() {
-        return zipcode;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
-
 }
