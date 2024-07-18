@@ -2,6 +2,7 @@ package jpql;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 
 public class JpaMain {
@@ -16,19 +17,50 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUserName("jpa1");
-            member.setAge(19);
-            em.persist(member);
+
+            Team teamA = new Team();
+            teamA.setName("teamA");
+            em.persist(teamA);
+
+            Team teamB = new Team();
+            teamB.setName("teamB");
+            em.persist(teamB);
+
+            Member memberA = new Member();
+            memberA.setUserName("jpa1");
+            memberA.setAge(19);
+            memberA.setTeam(teamA);
+            em.persist(memberA);
+
+            Member memberB = new Member();
+            memberB.setUserName("jpa2");
+            memberB.setAge(20);
+            memberB.setTeam(teamB);
+            em.persist(memberB);
+
+            Member memberC = new Member();
+            memberC.setUserName("jpa3");
+            memberC.setAge(30);
+            memberC.setTeam(teamB);
+            em.persist(memberC);
 
             em.flush();
             em.clear();
 
-            List<Team> resultList = em.createQuery("select t from Member as m join m.team as t", Team.class)
-                    .getResultList();
+            int resultCount = em.createQuery("update Member m set m.age=20")
+                    .executeUpdate();
 
-            List<Team> resultList2 = em.createQuery("select t from Member as m join m.team as t", Team.class)
-                    .getResultList();
+            System.out.println("resultCount = " + resultCount);
+
+//            //language=HQL
+//            String query = "select m from Member m join fetch m.team";
+//            List<Member> result = em.createQuery(query, Member.class)
+//                    .getResultList();
+//
+//
+//            for (Member member : result) {
+//                System.out.println("member = " + member.getUserName() + " team : " + member.getTeam().getName());
+//            }
 
             tx.commit();
         }catch (Exception e) {
