@@ -16,10 +16,8 @@ public class JpaMain {
 
         try {
 
-            Book book = new Book();
-            book.setName("JPA");
-            book.setAuthor("JPA고수 김준형");
-            em.persist(book);
+            em.createNativeQuery("select MEMBER_ID, city, street, zip_code from MEMBER")
+                            .getResultList();
 
             tx.commit();
         } catch (Exception e) {
