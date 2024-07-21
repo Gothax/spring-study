@@ -15,9 +15,9 @@ public class Member {
 
     @Id @GeneratedValue
     private Long id;
-    private String usrename;
+    private String username;
 
     public Member(String username) {
-        this.usrename = username;
+        this.username = username;
     }
 }
