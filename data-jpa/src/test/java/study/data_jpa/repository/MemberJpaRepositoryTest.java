@@ -96,4 +96,18 @@ class MemberJpaRepositoryTest {
         assertThat(members.size()).isEqualTo(3);
         assertThat(totalCount).isEqualTo(6);
     }
+
+    @Test
+    void bulkAgePlus() {
+        memberJpaRepository.save(new Member("member1", 11));
+        memberJpaRepository.save(new Member("member2", 14));
+        memberJpaRepository.save(new Member("member3", 16));
+        memberJpaRepository.save(new Member("member4", 18));
+        memberJpaRepository.save(new Member("member5", 21));
+        memberJpaRepository.save(new Member("member6", 41));
+
+        int resultCount = memberJpaRepository.bulkAgePlus(15);
+
+        assertThat(resultCount).isEqualTo(4);
+    }
 }
