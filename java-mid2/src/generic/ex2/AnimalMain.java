@@ -2,17 +2,18 @@ package generic.ex2;
 
 import generic.animal.Animal;
 import generic.animal.Cat;
+import generic.animal.Dog;
 
 public class AnimalMain {
 
     public static void main(String[] args) {
         Animal animal = new Animal("동물", 0);
-        C dog = new C("멍멍이", 100);
+        Dog dog = new Dog("멍멍이", 100);
         Cat cat = new Cat("냐옹이", 40);
 
-        Box<C> dogBox = new Box<>();
+        Box<Dog> dogBox = new Box<>();
         dogBox.set(dog);
-        C findDog = dogBox.get();
+        Dog findDog = dogBox.get();
         System.out.println("findDog = " + findDog);
 
         Box<Cat> catBox = new Box<>();
