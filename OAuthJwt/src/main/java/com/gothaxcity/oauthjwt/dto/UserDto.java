@@ -8,7 +8,7 @@ public class UserDto {
     private String name;
     private String username;
 
-    public UserDto(String role, String name, String username) {
+    public UserDto(String username, String name, String role) {
         this.role = role;
         this.name = name;
         this.username = username;
