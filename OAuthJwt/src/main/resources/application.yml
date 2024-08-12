@@ -41,4 +41,4 @@ spring:
             user-name-attribute: response
 
 jwt:
-  secret: c3ByaW5nLWJvb3Qt42sdfzxcadsfyZXQta2V5LXN1cGVyLXNlY3JldC15ZXMteWVzLXlfsdsfc2ewe2
+  secret: c3ByaW5nLWJvb3Qt42sdfzxcadsfyZXQta2V5LXN1cGVyLXNlY3JldC15ZXMteWVzLXlfsds-@rew12xcvnlk
