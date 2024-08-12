@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234321
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+logging.level:
+  org.hibernate.SQL: debug
+
+jwt:
+  secret: c3ByaW5nLWJvb3Qt42sdfzxcadsfyZXQta2V5LXN1cGVyLXNlY3JldC15ZXMteWVzLXlfsds-@rew12xcvnlk
