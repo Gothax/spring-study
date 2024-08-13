@@ -1,6 +1,8 @@
 package com.gothaxcity.springjwt.jwt;
 
 import com.gothaxcity.springjwt.dto.PrincipalUserDetails;
+import com.gothaxcity.springjwt.entity.RefreshEntity;
+import com.gothaxcity.springjwt.repository.RefreshRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -15,6 +17,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.util.Date;
 
 import static com.gothaxcity.springjwt.constant.Constants.*;
 
@@ -24,6 +27,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
+    private final RefreshRepository refreshRepository;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -35,15 +39,21 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         return authenticationManager.authenticate(authenticationToken);
     }
 
+    // (LoginSuccessHandler)
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
         String username = ((PrincipalUserDetails) authResult.getPrincipal()).getUsername();
         String role = authResult.getAuthorities().iterator().next().getAuthority();
 
+        // 토큰 생성
         String accessToken = jwtProvider.createJwt("access", username, role, ACCESS_EXPIRATION_MS);
         String refreshToken = jwtProvider.createJwt("refresh", username, role, REFRESH_EXPIRATION_MS);
 
+        // refresh 토큰 저장
+        addRefreshEntity(username, refreshToken, REFRESH_EXPIRATION_MS);
+
+        // 응답 설정
         response.addHeader("access", accessToken);
         response.addCookie(createCookie("refresh", refreshToken));
         response.setStatus(HttpStatus.OK.value());
@@ -63,5 +73,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 //        cookie.setSecure(true);
         cookie.setHttpOnly(true);
         return cookie;
+    }
+
+    private void addRefreshEntity(String username, String refreshToken, Long expiration) {
+        RefreshEntity refreshEntity = new RefreshEntity(username, refreshToken, new Date(System.currentTimeMillis() + expiration).toString());
+        refreshRepository.save(refreshEntity);
     }
 }

@@ -3,6 +3,7 @@ package com.gothaxcity.springjwt.config;
 import com.gothaxcity.springjwt.jwt.JwtFilter;
 import com.gothaxcity.springjwt.jwt.JwtProvider;
 import com.gothaxcity.springjwt.jwt.LoginFilter;
+import com.gothaxcity.springjwt.repository.RefreshRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +31,7 @@ public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JwtProvider jwtProvider;
+    private final RefreshRepository refreshRepository;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -63,7 +65,7 @@ public class SecurityConfig {
 
                 // 로그인 필터
                 .addFilterBefore(new JwtFilter(jwtProvider), LoginFilter.class)
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtProvider, refreshRepository), UsernamePasswordAuthenticationFilter.class);
 
 
         return httpSecurity.build();
