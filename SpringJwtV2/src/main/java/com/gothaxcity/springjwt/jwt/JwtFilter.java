@@ -2,6 +2,7 @@ package com.gothaxcity.springjwt.jwt;
 
 import com.gothaxcity.springjwt.dto.PrincipalUserDetails;
 import com.gothaxcity.springjwt.entity.UserEntity;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,24 +23,32 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorization = request.getHeader("Authorization");
+        String accessToken = request.getHeader("access");
 
         // authorization header 검증
-        if (authorization == null || !authorization.startsWith(TOKEN_PREFIX)) {
+        if (accessToken == null) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String token = authorization.substring(TOKEN_PREFIX.length());
+        // access token이 만료 되었는지 검증
+        try {
+            jwtProvider.isTokenExpired(accessToken);
+        } catch (ExpiredJwtException e) {
+            response.getWriter().print("access token expired");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
 
-        // 소멸시간 검증
-        if (jwtProvider.isTokenExpired(token)) {
-            filterChain.doFilter(request, response);
+        String category = jwtProvider.getCategory(accessToken);
+        if (!category.equals("access")) {
+            response.getWriter().print("invalid token");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         // 토근이 정상적이라면, 스프링 세큐리티 세션에 사용자를 등록
-        SecurityContextHolder.getContext().setAuthentication(jwtProvider.getAuthentication(token));
+        SecurityContextHolder.getContext().setAuthentication(jwtProvider.getAuthentication(accessToken));
         filterChain.doFilter(request, response);
     }
 }
