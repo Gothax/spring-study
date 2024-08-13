@@ -15,6 +15,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.io.IOException;
 
+import static com.gothaxcity.springjwt.constant.Constants.TOKEN_PREFIX;
+
 @RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -39,7 +41,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String jwtToken = jwtProvider.createJwt(username, role, 60 * 60 * 10L);
 
-        response.addHeader("Authorization", "Bearer " + jwtToken);
+        response.addHeader("Authorization", TOKEN_PREFIX + jwtToken);
     }
 
     @Override

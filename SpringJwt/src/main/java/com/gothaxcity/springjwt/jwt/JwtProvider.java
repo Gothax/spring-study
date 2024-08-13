@@ -1,7 +1,11 @@
 package com.gothaxcity.springjwt.jwt;
 
+import com.gothaxcity.springjwt.dto.PrincipalUserDetails;
+import com.gothaxcity.springjwt.entity.UserEntity;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -43,5 +47,11 @@ public class JwtProvider {
                 .expiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(secretKey)
                 .compact();
+    }
+
+    public Authentication getAuthentication(String token) {
+        UserEntity user = new UserEntity(getUsername(token), "tempPassword", getRole(token));
+        PrincipalUserDetails principalUserDetails = new PrincipalUserDetails(user);
+        return new UsernamePasswordAuthenticationToken(principalUserDetails, token, principalUserDetails.getAuthorities());
     }
 }
