@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import static com.gothaxcity.springjwt.constant.Constants.TOKEN_PREFIX;
 
+
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
