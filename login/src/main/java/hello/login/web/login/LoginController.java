@@ -24,6 +24,7 @@ import static hello.login.web.session.SessionConst.LOGIN_MEMBER;
 @RequiredArgsConstructor
 public class LoginController {
 
+    // session 방식
     private final LoginService loginService;
     private final SessionManager sessionManager;
 
