@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+// file store는 facade 방식으로 빼라는 피드백!
+
 @Component
 public class FileStore {
 
