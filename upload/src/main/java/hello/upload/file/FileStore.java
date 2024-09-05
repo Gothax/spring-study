@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 // file store는 facade 방식으로 빼라는 피드백!
+// 아키텍쳐에 대한 생각
 
 @Component
 public class FileStore {
