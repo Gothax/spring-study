@@ -12,6 +12,7 @@ public class DeaemonThreadMain {
         System.out.println(Thread.currentThread().getName() + ": main end");
     }
 
+
     static class DaemonThread extends Thread {
 
         @Override
