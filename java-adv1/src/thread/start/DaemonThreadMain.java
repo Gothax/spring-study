@@ -14,6 +14,8 @@ public class DaemonThreadMain {
     }
 
 
+    // thread 만들때 - Thread 클래스를 상속받거나
+    // Runnable 인터페이스를 구현하는 방법 --> 이걸 실무에서 주로 사용
     static class DaemonThread extends Thread {
 
         @Override
