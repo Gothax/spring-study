@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DiscoveryserviceApplication {
+public class DiscoveryService {
 
     public static void main(String[] args) {
-        SpringApplication.run(DiscoveryserviceApplication.class, args);
+        SpringApplication.run(DiscoveryService.class, args);
     }
 
 }
