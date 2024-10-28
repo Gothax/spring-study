@@ -1,5 +1,7 @@
 package thread.start;
 
+import java.util.Arrays;
+
 public class HelloThreadMain {
 
     public static void main(String[] args) {
@@ -12,6 +14,14 @@ public class HelloThreadMain {
 
 
         System.out.println(Thread.currentThread().getName() + ": main() end");
+
+
+        String s = "qeq\n;12";
+        String[] split = s.split("\\n");
+        System.out.println(Arrays.toString(split));
+
+
+
 
     }
 }
