@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    include: secret
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/yoon
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
