@@ -1,5 +1,6 @@
 package com.gothaxcity.oauthjwt4gradproj.account.config;
 
+import com.gothaxcity.oauthjwt4gradproj.account.service.CustomOauth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;

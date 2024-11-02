@@ -1,10 +1,12 @@
 package com.gothaxcity.oauthjwt4gradproj.account.dto;
 
+import com.gothaxcity.oauthjwt4gradproj.account.domain.UserEntity;
 import com.gothaxcity.oauthjwt4gradproj.account.exception.AuthException;
 import lombok.Builder;
 
 import java.util.Map;
 
+import static com.gothaxcity.oauthjwt4gradproj.account.domain.Role.USER;
 import static com.gothaxcity.oauthjwt4gradproj.exception.ErrorCode.ILLEGAL_REGISTRATION_ID;
 
 @Builder
@@ -29,6 +31,15 @@ public record OAuth2UserInfo(
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
                 .imageUrl((String) attributes.get("picture"))
+                .build();
+    }
+
+    public UserEntity toEntity() {
+        return UserEntity.builder()
+                .email(email)
+                .nickName(name) // TODO: 닉네임 자동 생성 기능
+                .imageUrl(imageUrl)
+                .role(USER)
                 .build();
     }
 }
