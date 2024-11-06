@@ -1,10 +1,10 @@
-package com.gothaxcity.ecommerce;
+package com.gothaxcity.discoveryservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EcommerceApplicationTests {
+class DiscoveryServiceApplicationTests {
 
     @Test
     void contextLoads() {

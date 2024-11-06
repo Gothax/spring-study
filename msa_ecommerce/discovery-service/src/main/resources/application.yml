@@ -1,0 +1,8 @@
+server:
+  port: 8761
+
+eureka:
+  client:
+    # 자기 자신이 Eureka 서버이므로 false
+    registerWithEureka: false
+    fetchRegistry: false
