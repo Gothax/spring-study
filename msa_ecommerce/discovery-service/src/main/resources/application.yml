@@ -1,6 +1,10 @@
 server:
   port: 8761
 
+spring:
+  application:
+    name: discoveryservice
+
 eureka:
   client:
     # 자기 자신이 Eureka 서버이므로 false
