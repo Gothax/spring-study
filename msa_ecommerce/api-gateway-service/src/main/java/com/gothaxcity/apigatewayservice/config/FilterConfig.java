@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 //@Configuration
-//public class FilterConfig {
+public class FilterConfig {
 
 
     // yml file 동작을 여기서 대체할 수 있다
@@ -19,4 +19,4 @@ import org.springframework.context.annotation.Configuration;
     //             .build();
     // }
 
-//}
+}
