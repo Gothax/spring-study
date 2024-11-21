@@ -1,8 +1,10 @@
 package com.gothaxcity.userservice.dto;
 
+import com.gothaxcity.userservice.vo.ResponseOrder;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class UserDto {
@@ -14,4 +16,5 @@ public class UserDto {
     private Date createdAt;
 
     private String encryptedPassword;
+    private List<ResponseOrder> orders;
 }
