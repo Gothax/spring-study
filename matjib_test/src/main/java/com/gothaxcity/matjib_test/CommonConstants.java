@@ -4,5 +4,4 @@ public class CommonConstants {
     public static final String clientId = "82fablUoTZTT3J54ZlaW";
     public static final String clientSecret = "8IIcrvNv9U";
 
-    //TODO: OAuth 미리 구현 - google, apple
 }
