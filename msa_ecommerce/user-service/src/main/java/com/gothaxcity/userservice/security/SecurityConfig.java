@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,13 +22,14 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final UserDetailsService userDetailsService;
+    private final Environment env;
+
     private static final String[] WHITE_LIST = {
             "/users/**",
             "/health_check",
             "/**"
-
     };
     private static final String WHITE_IP = "192.168.150.207";
 
@@ -55,7 +57,9 @@ public class SecurityConfig {
                 )
 
                 // 필터
-                .addFilter(new AuthenticationFilter(authenticationConfiguration.getAuthenticationManager()));
+                .addFilter(new AuthenticationFilter(authenticationConfiguration.getAuthenticationManager(),
+                                                    userDetailsService,
+                                                    env));
 
         return httpSecurity.build();
     }
