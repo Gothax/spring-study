@@ -13,11 +13,40 @@ spring:
     name: api-gateway-service
   cloud:
     gateway:
+      default--filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
       routes:
         - id: user-service
           uri: lb://user-service
           predicates:
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+        - id: user-service
+          uri: lb://user-service
+          predicates:
             - Path=/user-service/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
         - id: catalog-service
           uri: lb://catalog-service
           predicates:
@@ -47,9 +76,3 @@ spring:
                 baseMessage: Hi, this is logging filter
                 preLogger: true
                 postLogger: true
-      default-filters:
-        - name: GlobalFilter
-          args:
-            baseMessage: Spring Cloud Gateway Global Filter
-            preLogger: true
-            postLogger: true
