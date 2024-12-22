@@ -1,7 +1,10 @@
 package com.gothaxcity.userservice.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gothaxcity.userservice.dto.UserDto;
+import com.gothaxcity.userservice.service.CustomUserDetailsService;
 import com.gothaxcity.userservice.vo.RequestLogin;
+import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,22 +16,26 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
+
+import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 
 
 @Slf4j
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private final UserDetailsService userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
     private final Environment env;
 
     public AuthenticationFilter(AuthenticationManager authenticationManager,
-                                UserDetailsService userDetailsService,
+                                CustomUserDetailsService userDetailsService,
                                 Environment env) {
         super(authenticationManager);
         this.userDetailsService = userDetailsService;
@@ -59,8 +66,25 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             Authentication authResult) throws IOException, ServletException {
 
         String username = ((User)authResult.getPrincipal()).getUsername();
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
+        UserDto userDetails = userDetailsService.getUserDetailsByEmail(username);
+        SecretKey secretKey = getSecretKey();
+
+        String token = Jwts.builder()
+                .subject(userDetails.getUserId())
+                .expiration(new Date(System.currentTimeMillis() +
+                                             Long.parseLong(env.getProperty("token.expiration-time"))))
+                .signWith(secretKey)
+                .compact();
+
+        response.addHeader("token", token);
+        response.addHeader("userId", userDetails.getUserId());
+
+    }
+
+    private SecretKey getSecretKey() {
+        byte[] envSecretBytes = Objects.requireNonNull(env.getProperty("token.secret")).getBytes();
+        return new SecretKeySpec(envSecretBytes, HS512.getJcaName());
     }
 
 

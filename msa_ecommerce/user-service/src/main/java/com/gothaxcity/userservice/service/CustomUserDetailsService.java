@@ -1,8 +1,10 @@
 package com.gothaxcity.userservice.service;
 
 import com.gothaxcity.userservice.domain.UserEntity;
+import com.gothaxcity.userservice.dto.UserDto;
 import com.gothaxcity.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +31,16 @@ public class CustomUserDetailsService implements UserDetailsService {
         // spring security User class
         return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(),
                         true, true, true, true, new ArrayList<>());
-
     }
+
+    public UserDto getUserDetailsByEmail(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+
+        if (userEntity == null) {
+            throw new UsernameNotFoundException(email);
+        }
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(userEntity, UserDto.class);
+    }
+
 }

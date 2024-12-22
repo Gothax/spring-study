@@ -30,3 +30,6 @@ eureka:
 greeting:
   message: Welcome to Simple E commerce Application.
 
+token:
+  expiration-time: 86400000
+  secret: sdflkjsdafjlkdsfalfewnelkncvixojliasejlsajfjfsefklafdjdsfkjsdfajkdfljfsdasdjnekejwmxwef12ccdisioioi353wwweeedxsllwefnewndon64332nsdjnlnasnl
