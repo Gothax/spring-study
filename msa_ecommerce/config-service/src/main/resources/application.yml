@@ -5,6 +5,8 @@ spring:
   application:
     name: config-server
   cloud:
-    server:
-      git:
-        uri: 
+    config:
+      server:
+        git:
+          uri: https://github.com/Gothax/spring-study
+          search-paths: msa_ecommerce

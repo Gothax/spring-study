@@ -29,7 +29,8 @@ public class SecurityConfig {
     private static final String[] WHITE_LIST = {
             "/users/**",
             "/health_check",
-            "/**"
+            "/**",
+            "/actuator/**",
     };
     private static final String WHITE_IP = "192.168.150.207";
 
