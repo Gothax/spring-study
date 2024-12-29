@@ -1,0 +1,22 @@
+spring:
+  batch:
+    job:
+      enabled: false
+
+  datasource:
+    meta:
+      jdbcUrl: jdbc:postgresql://localhost:5432/batch
+      username: postgres
+      password: 1234
+      driverClassName: org.postgresql.Driver
+    data:
+      jdbcUrl: jdbc:postgresql://localhost:5432/batch2
+      username: postgres
+      password: 1234
+      driverClassName: org.postgresql.Driver
+
+
+
+logging.level:
+  org.hibernate.SQL: debug
+
