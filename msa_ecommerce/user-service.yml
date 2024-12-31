@@ -1,0 +1,12 @@
+spring:
+ datasource:
+   url: jdbc:h2:mem:testdb
+   username: sa
+   password: '{cipher}50dcc1c3d9a68eca99379c6e4a9df9f3bcca669fde258def68bd73e7ddfa1497'
+
+token:
+  expiration-time: 86400000
+  secret: sdflkjsdafjlkdsfalfewnelkncvixojliasejlsajfjfsefklafdjdsfkjsdfajkdfljfsdasdjnekejwmxwef12ccdisioioi353wwweeedxsllwefnewndon64332nsdjnlnasnl_dev
+
+gateway:
+  ip: 
