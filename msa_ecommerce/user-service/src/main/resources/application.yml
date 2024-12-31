@@ -45,3 +45,6 @@ management:
       exposure:
         include: refresh, health, beans, busrefresh
 
+logging:
+  level:
+    com.gothaxcity.userservice.client: DEBUG

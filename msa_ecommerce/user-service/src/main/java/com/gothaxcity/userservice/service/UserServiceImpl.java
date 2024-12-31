@@ -6,6 +6,7 @@ import com.gothaxcity.userservice.dto.UserDto;
 import com.gothaxcity.userservice.repository.UserRepository;
 import com.gothaxcity.userservice.vo.ResponseOrder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +21,7 @@ import static org.modelmapper.convention.MatchingStrategies.STRICT;
 
 @Service
 @RequiredArgsConstructor(access = PROTECTED)
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -71,6 +73,14 @@ public class UserServiceImpl implements UserService {
         /*
          * Using Feign Client to call Order Service
          */
+//        List<ResponseOrder> responseOrderList = null;
+//        try {
+//            responseOrderList = orderServiceClient.getOrders(userId);
+//        } catch (FeignException e) {
+//            log.error(e.getMessage());
+//        }
+
+        // Error decoder를 사용한 Feign Client
         List<ResponseOrder> responseOrderList = orderServiceClient.getOrders(userId);
         userDto.setOrders(responseOrderList);
 
