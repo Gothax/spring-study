@@ -8,5 +8,8 @@ token:
   expiration-time: 86400000
   secret: sdflkjsdafjlkdsfalfewnelkncvixojliasejlsajfjfsefklafdjdsfkjsdfajkdfljfsdasdjnekejwmxwef12ccdisioioi353wwweeedxsllwefnewndon64332nsdjnlnasnl_dev
 
+order_service:
+  url: http://localhost:8000/order-service/%s/orders
+
 gateway:
-  ip: 
+  ip:
