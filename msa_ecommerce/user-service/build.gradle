@@ -45,16 +45,21 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-    implementation 'org.springframework.cloud:spring-cloud-starter-config'
-    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
 
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.12.5'
 
     implementation 'org.modelmapper:modelmapper:3.1.1'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
 
+
+    // cloud
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 }
 
