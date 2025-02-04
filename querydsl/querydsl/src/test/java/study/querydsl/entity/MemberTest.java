@@ -32,6 +32,8 @@ class MemberTest {
         em.persist(memberA);
         em.persist(memberB);
         em.persist(memberC);
+
+
         em.flush();
         em.clear();
         // when

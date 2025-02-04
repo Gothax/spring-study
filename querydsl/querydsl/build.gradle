@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.2'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'study'
@@ -33,7 +34,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	//Querydsl 추가 주의 : build and run - gradle 사용해야함
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
+
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
 	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
