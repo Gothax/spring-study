@@ -1,5 +1,7 @@
 package thread.start;
 
+import util.MyLogger;
+
 public class HelloRunnable implements Runnable {
 
     // Runnable 인터페이스를 구현하는게 더 나은 방법인 이유
@@ -9,6 +11,6 @@ public class HelloRunnable implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName() + ": run()");
+        MyLogger.log(Thread.currentThread().getName() + ": run()");
     }
 }
