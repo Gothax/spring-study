@@ -13,7 +13,15 @@ public class BoundedMain {
 //        BoundedQueue queue = new BoundedQueueV2(2);
 //        BoundedQueue queue = new BoundedQueueV3(2);
 //        BoundedQueue queue = new BoundedQueueV4(2);
-        BoundedQueue queue = new BoundedQueueV5(2);
+//        BoundedQueue queue = new BoundedQueueV5(2);
+//        BoundedQueue queue = new BoundedQueueV6_1(2);
+//        BoundedQueue queue = new BoundedQueueV6_2(2);
+//        BoundedQueue queue = new BoundedQueueV6_3(2);
+        BoundedQueue queue = new BoundedQueueV6_4(2);
+
+        // 예제에서는 통일감을 위해 새로운 클래스를 만들지만
+        // 실무에서는 이렇게 바로 자료형을 사용한다
+//        BlockingQueue queue = new ArrayBlockingQueue<>(2);
 
         producerFirst(queue); // 생산자 먼저 실행
 //        consumerFirst(queue); // 소비자 먼저 실행
