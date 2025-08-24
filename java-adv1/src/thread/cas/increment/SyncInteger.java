@@ -1,4 +1,4 @@
-package thread.cas;
+package thread.cas.increment;
 
 public class SyncInteger implements IncrementInteger{
 

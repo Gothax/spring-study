@@ -1,8 +1,8 @@
-package thread.cas;
+package thread.cas.increment;
 
-public class BasicInteger implements IncrementInteger{
+public class VolatileInteger implements IncrementInteger{
 
-    private int value;
+    private volatile int value;
 
     @Override
     public void increment() {
