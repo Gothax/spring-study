@@ -6,7 +6,13 @@ public class SimpleListMainV2 {
 
     public static void main(String[] args) throws InterruptedException {
 //        test(new BasicList());
-        test(new SyncList());
+//        test(new SyncList());
+
+        // basic list는 동기화가 안됨
+        BasicList basicList = new BasicList();
+        // 이를 동기화하는 프록시 객체 생성
+        SyncProxyList syncProxyList = new SyncProxyList(basicList);
+        test(syncProxyList);
     }
 
     private static void test(SimpleList list) throws InterruptedException {
