@@ -1,4 +1,4 @@
-package thread.executor;
+package thread.executor.future;
 
 import java.util.Random;
 
@@ -13,6 +13,8 @@ public class RunnableMain {
         thread.start();
         thread.join();
 
+        // 별도의 스레드에서 만든 값을 가져오는 것이 문제점임 - join으로 기다리고, 필드로 값을 꺼냄
+        // return으로 값을 반환하는 것이 Future, Callable
         int result = task.value;
         log("result value = " + result);
     }
