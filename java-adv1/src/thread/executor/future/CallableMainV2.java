@@ -21,6 +21,7 @@ public class CallableMainV2 {
 
 
         log("result value=" + result);
+        log("future 완료, future= " + future);
 
 
         es.close();
