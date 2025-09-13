@@ -5,8 +5,8 @@ import static util.MyLogger.log;
 public class SimpleListMainV2 {
 
     public static void main(String[] args) throws InterruptedException {
-//        test(new BasicList());
-//        test(new SyncList());
+        test(new BasicList());
+        test(new SyncList());
 
         // basic list는 동기화가 안됨
         BasicList basicList = new BasicList();

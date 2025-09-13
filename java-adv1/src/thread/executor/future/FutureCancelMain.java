@@ -7,7 +7,8 @@ import static util.ThreadUtils.sleep;
 
 public class FutureCancelMain {
 
-    private static boolean mayInterruptIfRunning = true;
+//    private static boolean mayInterruptIfRunning = true;
+    private static boolean mayInterruptIfRunning = false;
 
     public static void main(String[] args) {
         ExecutorService es = Executors.newFixedThreadPool(1);
@@ -23,11 +24,13 @@ public class FutureCancelMain {
 
         try {
             log("Future result = " + future.get());
-        } catch (CancellationException) {
-
+        } catch (CancellationException e) {
+            log("Future는 이미 취소되었습니다.");
         } catch (ExecutionException | InterruptedException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
+        es.close();
     }
 
 
